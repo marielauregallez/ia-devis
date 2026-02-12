@@ -1,0 +1,10 @@
+{
+  "installation_terminee": false,
+  "etapes": {
+    "etape_entreprise": false,
+    "etape_mentions_legales": false,
+    "etape_services": false,
+    "etape_tarification": false,
+    "etape_logo": false
+  }
+}

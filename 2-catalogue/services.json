@@ -1,0 +1,14 @@
+{
+  "catalogue_services": [
+    {
+      "id": "EXEMPLE-01",
+      "nom": "(nom du service)",
+      "description": "(description courte)",
+      "categorie": "(categorie)",
+      "unite": "(forfait, jour, mois, heure...)",
+      "prix_unitaire_chf": 0,
+      "duree_estimee_jours": null
+    }
+  ],
+  "_commentaire": "Ce fichier sera rempli automatiquement par l'agent lors de la configuration. Vous pouvez aussi le modifier manuellement."
+}
