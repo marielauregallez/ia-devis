@@ -2,6 +2,27 @@
 
 Un assistant intelligent qui vous aide a creer des devis professionnels, sans aucune competence technique.
 
+## Pour qui, pourquoi ?
+PME de services (BTP, architecture, IT, conseil, maintenance industrielle).
+
+Contexte:
+-environ 30 à 200 devis/mois générés
+-Temps moyen de rédaction : 20 à 60 min
+-Forte variabilité selon le commercial
+-Oublis fréquents de lignes
+-Difficulté à harmoniser les formulations
+-Marge parfois incohérente
+-Temps non facturé élevé
+-Risque d’erreurs tarifaires
+-Manque de standardisation
+-Dépendance à 1 ou 2 personnes “qui savent faire”
+
+## Objectif du système
+Accélérer la rédaction des devis
+Standardiser la structure des devis
+Sécuriser les marges
+Maintenir validation humaine
+
 ## Comment ca marche ?
 
 Vous repondez a quelques questions dans le chat, l'agent s'occupe du reste :
@@ -107,3 +128,7 @@ Ou editez directement les fichiers dans les dossiers correspondants.
 ## Important
 
 **Tout devis genere doit etre relu et valide par un humain avant envoi.**
+
+## KPI
+
+## Lien vers vidéos démo
