@@ -90,6 +90,28 @@ ia_devis/
 |   |-- devis.md
 |   +-- devis.html
 |
+|-- adapters/ .................... Connecteurs LLM (neutre techno)
+|   |-- openai_provider.py
+|   |-- azure_openai_provider.py
+|   |-- mistral_provider.py
+|   +-- ollama_provider.py
+|
+|-- schemas/ ..................... Contrats de donnees JSON
+|   |-- devis.schema.json
+|   +-- services.schema.json
+|
+|-- tests/ ....................... Tests automatiques + exemples
+|   |-- sample_devis.json
+|   +-- test_rule_version.py
+|
+|-- .github/workflows/ ........... CI (lint + tests + schemas)
+|   +-- ci.yml
+|
+|-- GOVERNANCE.md ................ Gouvernance (RACI, controles)
+|-- RISKS.md ..................... Registre de risques IA
+|-- DATA_POLICY.md ............... Politique de donnees (RGPD)
+|-- CHECKLIST_PREPROD.md ......... Checklist pre-production
+|
 |-- _installation/ ............... Suivi de la configuration
 |   +-- etat.json
 |
@@ -128,6 +150,17 @@ Ou editez directement les fichiers dans les dossiers correspondants.
 ## Important
 
 **Tout devis genere doit etre relu et valide par un humain avant envoi.**
+
+## Neutralite technologique (LLM)
+
+Le projet peut fonctionner avec plusieurs providers, via une interface unique :
+- OpenAI
+- Azure OpenAI
+- Mistral
+- Ollama (local)
+
+Variable a definir dans `.env` :
+- `LLM_PROVIDER=openai|azure|mistral|ollama`
 
 ## KPI
 

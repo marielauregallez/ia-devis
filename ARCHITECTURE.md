@@ -19,6 +19,11 @@ flowchart TD
     R --> T[_technique scripts Python]
 
     E4 --> GD[generer_devis.py]
+    GD --> F[adapters/factory.py]
+    F --> OAI[OpenAI]
+    F --> AZ[Azure OpenAI]
+    F --> MIS[Mistral]
+    F --> OLL[Ollama local]
     E1 --> GD
     E2 --> GD
     GD --> J[devis.json]
@@ -85,6 +90,13 @@ flowchart TD
 - Calcul/affichage des montants a partir des donnees de reference.
 - Validation explicite avant generation finale.
 - Production des fichiers de sortie (`json`, `md`, `html`, `pdf`).
+- Validation de schemas (`schemas/*.json`) en CI.
+
+## Contrats de donnees (schemas)
+
+- `schemas/services.schema.json` : valide la structure du catalogue.
+- `schemas/devis.schema.json` : valide la structure d'un devis genere.
+- CI execute automatiquement la validation des schemas a chaque push.
 
 ## Justification des choix d'architecture
 

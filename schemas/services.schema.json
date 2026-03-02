@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Catalogue de services",
+  "type": "object",
+  "required": ["catalogue_services"],
+  "properties": {
+    "catalogue_services": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "nom",
+          "description",
+          "categorie",
+          "unite",
+          "prix_unitaire_chf"
+        ],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "nom": { "type": "string", "minLength": 1 },
+          "description": { "type": "string", "minLength": 1 },
+          "categorie": { "type": "string", "minLength": 1 },
+          "unite": { "type": "string", "minLength": 1 },
+          "prix_unitaire_chf": { "type": "number", "minimum": 0 },
+          "duree_estimee_jours": {
+            "type": ["number", "integer", "null"],
+            "minimum": 0
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

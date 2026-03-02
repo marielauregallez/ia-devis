@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Devis structure",
+  "type": "object",
+  "required": ["devis"],
+  "properties": {
+    "devis": {
+      "type": "object",
+      "required": [
+        "id",
+        "rule_version",
+        "date_emission",
+        "client",
+        "prestations",
+        "sous_total_chf",
+        "total_ttc_chf"
+      ],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "rule_version": { "type": "string", "minLength": 1 },
+        "date_emission": { "type": "string", "minLength": 1 },
+        "client": { "type": "object" },
+        "prestations": { "type": "array" },
+        "sous_total_chf": { "type": "number" },
+        "total_ttc_chf": { "type": "number" }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

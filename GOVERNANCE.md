@@ -15,6 +15,16 @@ Ce document definit les regles de gouvernance pour utiliser `ia-devis` de manier
   - hypotheses emises.
 - La validation humaine est une etape de controle qualite et de responsabilite legale.
 
+## RACI (qui valide quoi)
+
+| Activite | Responsable (R) | Approbateur (A) | Consulte (C) | Informe (I) |
+|---|---|---|---|---|
+| Configuration des services et tarifs | Responsable metier | Direction | Equipe commerciale | Equipe operationnelle |
+| Validation d'un devis avant envoi | Commercial en charge | Responsable metier | Operations | Direction |
+| Mise a jour des regles IA | Responsable metier | Direction | IT/IA | Commerciaux |
+| Gestion des incidents IA | IT/IA | Responsable metier | Direction | Equipe commerciale |
+| Revue conformite RGPD | DPO/Responsable conformite | Direction | IT/IA | Equipe metier |
+
 ## Gestion des erreurs IA
 
 - Si la sortie IA est invalide (format, calcul, incoherence), la generation est interrompue.
@@ -65,3 +75,9 @@ Ce document definit les regles de gouvernance pour utiliser `ia-devis` de manier
 - Revue operationnelle : mensuelle
 - Revue securite/conformite : trimestrielle
 - Revue complete du dispositif de gouvernance : semestrielle
+
+## Documents associes
+
+- Registre des risques : `RISKS.md`
+- Checklist pre-production : `CHECKLIST_PREPROD.md`
+- Politique de donnees : `DATA_POLICY.md`

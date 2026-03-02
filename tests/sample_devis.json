@@ -1,0 +1,20 @@
+{
+  "devis": {
+    "id": "DEV-EXEMPLE-001",
+    "rule_version": "2026.03",
+    "date_emission": "2026-03-02",
+    "client": {
+      "nom": "Client Exemple"
+    },
+    "prestations": [
+      {
+        "description": "Intervention de maintenance",
+        "quantite": 1,
+        "prix_unitaire_chf": 500,
+        "montant_chf": 500
+      }
+    ],
+    "sous_total_chf": 500,
+    "total_ttc_chf": 540.5
+  }
+}

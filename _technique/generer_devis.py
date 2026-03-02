@@ -1,14 +1,19 @@
-import os
 import json
+import os
+import sys
 from pathlib import Path
+
 from dotenv import load_dotenv
-from openai import OpenAI
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+if str(BASE_DIR) not in sys.path:
+    sys.path.insert(0, str(BASE_DIR))
+
+from adapters.factory import build_provider  # noqa: E402
 
 # -------------------------
 # Configuration
 # -------------------------
-
-BASE_DIR = Path(__file__).resolve().parent.parent
 
 ENTREPRISE_DIR = BASE_DIR / "1-entreprise"
 CATALOGUE_DIR = BASE_DIR / "2-catalogue"
@@ -70,27 +75,20 @@ Instructions :
 - Réponds uniquement en JSON strict selon le format défini.
 """
 
-# -------------------------
-# Appel LLM
-# -------------------------
-
-def appeler_llm(prompt):
-    load_dotenv()
-    client = OpenAI()
-
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0
-    )
-
-    return response.choices[0].message.content
+def extraire_json_strict(texte):
+    texte = texte.strip()
+    if texte.startswith("```"):
+        lignes = texte.splitlines()
+        lignes = [line for line in lignes if not line.strip().startswith("```")]
+        texte = "\n".join(lignes).strip()
+    return json.loads(texte)
 
 # -------------------------
 # Principal
 # -------------------------
 
 def main():
+    load_dotenv()
     verifier_fichiers()
 
     entreprise = charger_texte(ENTREPRISE_DIR / "identite.md")
@@ -101,13 +99,35 @@ def main():
 
     prompt = construire_prompt(entreprise, mentions, services, tarification, demande)
 
-    reponse_brute = appeler_llm(prompt)
+    provider_name = os.getenv("LLM_PROVIDER", "openai")
+    model = os.getenv("LLM_MODEL", "gpt-4o-mini")
+    rule_version = os.getenv("RULE_VERSION", "2026.03")
+
+    provider = build_provider(provider_name)
+    reponse_brute = provider.generate_quote(
+        prompt=prompt,
+        config={
+            "model": model,
+            "temperature": 0,
+            "api_key": os.getenv("OPENAI_API_KEY"),
+            "azure_api_key": os.getenv("AZURE_OPENAI_API_KEY"),
+            "azure_endpoint": os.getenv("AZURE_OPENAI_ENDPOINT"),
+            "azure_api_version": os.getenv("AZURE_OPENAI_API_VERSION", "2024-10-21"),
+            "mistral_api_key": os.getenv("MISTRAL_API_KEY"),
+            "ollama_base_url": os.getenv("OLLAMA_BASE_URL", "http://localhost:11434"),
+        },
+    )
 
     # Tentative de parsing JSON
     try:
-        donnees_devis = json.loads(reponse_brute)
+        donnees_devis = extraire_json_strict(reponse_brute)
     except json.JSONDecodeError:
         raise ValueError("La reponse du modele n'est pas un JSON valide.")
+
+    if isinstance(donnees_devis, dict):
+        devis = donnees_devis.setdefault("devis", {})
+        if isinstance(devis, dict):
+            devis["rule_version"] = rule_version
 
     RESULTAT_DIR.mkdir(exist_ok=True)
 
