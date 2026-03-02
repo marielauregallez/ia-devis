@@ -69,56 +69,44 @@ ia_devis/
 |
 |-- LISEZ-MOI.md ................. Ce fichier
 |
-|-- 1-entreprise/ ................ Vos informations
-|   |-- identite.md
-|   |-- mentions-legales.md
-|   +-- (votre logo)
+|-- metier/ ...................... Ce que la PME configure
+|   |-- entreprise/
+|   |   |-- identite.md
+|   |   +-- mentions-legales.md
+|   |-- catalogue/
+|   |   |-- services.json
+|   |   +-- regles-tarification.md
+|   +-- clients/
+|       |-- fichier-clients.json
+|       +-- historique-devis.json
 |
-|-- 2-catalogue/ ................. Vos services et tarifs
-|   |-- services.json
-|   +-- regles-tarification.md
+|-- operations/ .................. Ce que l'utilisateur utilise au quotidien
+|   |-- demande/
+|   |   +-- demande-client.txt
+|   +-- resultats/
+|       |-- devis.json
+|       |-- devis.md
+|       +-- devis.html
 |
-|-- 3-clients/ ................... Votre base clients
-|   |-- fichier-clients.json
-|   +-- historique-devis.json
+|-- cadre/ ....................... Documents de reference et gouvernance
+|   |-- ARCHITECTURE.md
+|   |-- GOVERNANCE.md
+|   |-- MESURES.md
+|   |-- RISKS.md
+|   |-- DATA_POLICY.md
+|   +-- CHECKLIST_PREPROD.md
 |
-|-- 4-nouvelle-demande/ .......... La demande a traiter
-|   +-- demande-client.txt
-|
-|-- 5-devis-genere/ .............. Le resultat
-|   |-- devis.json
-|   |-- devis.md
-|   +-- devis.html
-|
-|-- adapters/ .................... Connecteurs LLM (neutre techno)
-|   |-- openai_provider.py
-|   |-- azure_openai_provider.py
-|   |-- mistral_provider.py
-|   +-- ollama_provider.py
-|
-|-- schemas/ ..................... Contrats de donnees JSON
-|   |-- devis.schema.json
-|   +-- services.schema.json
-|
-|-- tests/ ....................... Tests automatiques + exemples
-|   |-- sample_devis.json
-|   +-- test_rule_version.py
+|-- technique/ ................... Zone technique (peut etre ignoree par un profil metier)
+|   |-- adapters/ ................ Interface LLM neutre techno
+|   |-- schemas/ ................. Contrats JSON
+|   |-- tests/ ................... Tests automatiques
+|   +-- scripts/ ................. Scripts Python (generation + validation)
 |
 |-- .github/workflows/ ........... CI (lint + tests + schemas)
 |   +-- ci.yml
 |
-|-- GOVERNANCE.md ................ Gouvernance (RACI, controles)
-|-- RISKS.md ..................... Registre de risques IA
-|-- DATA_POLICY.md ............... Politique de donnees (RGPD)
-|-- CHECKLIST_PREPROD.md ......... Checklist pre-production
-|
 |-- _installation/ ............... Suivi de la configuration
 |   +-- etat.json
-|
-|-- _technique/ .................. Scripts (pas besoin d'y toucher)
-|   |-- generer_devis.py
-|   |-- generer_pdf.py
-|   +-- requirements.txt
 |
 +-- .cursor/rules/ ............... Comportement de l'agent
     +-- agent-devis.mdc

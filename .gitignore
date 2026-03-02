@@ -1,11 +1,13 @@
 # Fichiers generes (specifiques a chaque utilisateur)
-5-devis-genere/devis.html
-5-devis-genere/devis.pdf
+operations/resultats/devis.html
+operations/resultats/devis.pdf
 
 # Environnement Python
 __pycache__/
 *.pyc
 .env
+.pytest_cache/
+.ruff_cache/
 
 # Systeme
 .DS_Store

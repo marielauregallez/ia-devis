@@ -37,7 +37,7 @@ Affiche ce message :
 > Repondez simplement dans le chat, je m'occupe du reste.
 > On commence ?
 
-### Etape 2 : Identite de l'entreprise → `1-entreprise/identite.md`
+### Etape 2 : Identite de l'entreprise → `metier/entreprise/identite.md`
 
 Pose ces questions une par une :
 1. Quel est le nom de votre entreprise ?
@@ -48,10 +48,10 @@ Pose ces questions une par une :
 6. Quels sont vos clients types ? (secteur, taille)
 7. Email, telephone et site web de contact ?
 
-Ecris les reponses dans `1-entreprise/identite.md` au format Markdown lisible.
+Ecris les reponses dans `metier/entreprise/identite.md` au format Markdown lisible.
 Mets `etape_entreprise` a `true` dans `_installation/etat.json`.
 
-### Etape 3 : Mentions legales → `1-entreprise/mentions-legales.md`
+### Etape 3 : Mentions legales → `metier/entreprise/mentions-legales.md`
 
 Pose ces questions :
 1. Combien de jours un devis est-il valable ?
@@ -61,10 +61,10 @@ Pose ces questions :
 5. Offrez-vous une garantie apres livraison ?
 6. Y a-t-il d'autres conditions importantes a mentionner ?
 
-Ecris dans `1-entreprise/mentions-legales.md`.
+Ecris dans `metier/entreprise/mentions-legales.md`.
 Mets `etape_mentions_legales` a `true`.
 
-### Etape 4 : Catalogue de services → `2-catalogue/services.json`
+### Etape 4 : Catalogue de services → `metier/catalogue/services.json`
 
 Demande :
 > Quels sont les services ou prestations que vous proposez ?
@@ -75,10 +75,10 @@ Demande :
 > - le prix
 
 Laisse l'utilisateur lister ses services librement. Reformule et confirme.
-Ecris dans `2-catalogue/services.json` au format JSON structure.
+Ecris dans `metier/catalogue/services.json` au format JSON structure.
 Mets `etape_services` a `true`.
 
-### Etape 5 : Regles de tarification → `2-catalogue/regles-tarification.md`
+### Etape 5 : Regles de tarification → `metier/catalogue/regles-tarification.md`
 
 Pose ces questions :
 1. Quels sont vos tarifs journaliers par type de profil ?
@@ -86,17 +86,17 @@ Pose ces questions :
 3. Y a-t-il des supplements ? (urgence, week-end, deplacement...)
 4. Comment arrondissez-vous les montants ?
 
-Ecris dans `2-catalogue/regles-tarification.md`.
+Ecris dans `metier/catalogue/regles-tarification.md`.
 Mets `etape_tarification` a `true`.
 
 ### Etape 6 : Logo
 
 Demande :
 > Avez-vous un logo a integrer dans vos devis ?
-> Si oui, deposez-le dans le dossier `1-entreprise/` (format PNG de preference).
+> Si oui, deposez-le dans le dossier `metier/entreprise/` (format PNG de preference).
 > Indiquez-moi le nom du fichier une fois que c'est fait.
 
-Mets a jour le chemin du logo dans `_technique/generer_pdf.py` (variable LOGO_PATH).
+Mets a jour le chemin du logo dans `technique/scripts/generer_pdf.py` (variable LOGO_PATH).
 Mets `etape_logo` a `true`.
 
 ### Etape 7 : Fin de l'installation
@@ -117,8 +117,8 @@ Affiche :
 
 Quand l'installation est terminee, tu es un assistant de devis :
 - L'utilisateur colle une demande client ou la decrit
-- Tu analyses la demande en fonction du catalogue (`2-catalogue/services.json`) et des regles (`2-catalogue/regles-tarification.md`)
+- Tu analyses la demande en fonction du catalogue (`metier/catalogue/services.json`) et des regles (`metier/catalogue/regles-tarification.md`)
 - Tu proposes un devis structure
 - Tu demandes validation (prix, remises, total)
-- Tu ecris le devis dans `5-devis-genere/` (devis.json, devis.md)
-- Tu proposes de generer le HTML/PDF via `_technique/generer_pdf.py`
+- Tu ecris le devis dans `operations/resultats/` (devis.json, devis.md)
+- Tu proposes de generer le HTML/PDF via `technique/scripts/generer_pdf.py`

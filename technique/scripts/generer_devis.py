@@ -5,9 +5,10 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-if str(BASE_DIR) not in sys.path:
-    sys.path.insert(0, str(BASE_DIR))
+ROOT_DIR = Path(__file__).resolve().parent.parent.parent
+TECHNIQUE_DIR = ROOT_DIR / "technique"
+if str(TECHNIQUE_DIR) not in sys.path:
+    sys.path.insert(0, str(TECHNIQUE_DIR))
 
 from adapters.factory import build_provider  # noqa: E402
 
@@ -15,10 +16,10 @@ from adapters.factory import build_provider  # noqa: E402
 # Configuration
 # -------------------------
 
-ENTREPRISE_DIR = BASE_DIR / "1-entreprise"
-CATALOGUE_DIR = BASE_DIR / "2-catalogue"
-DEMANDE_DIR = BASE_DIR / "4-nouvelle-demande"
-RESULTAT_DIR = BASE_DIR / "5-devis-genere"
+ENTREPRISE_DIR = ROOT_DIR / "metier" / "entreprise"
+CATALOGUE_DIR = ROOT_DIR / "metier" / "catalogue"
+DEMANDE_DIR = ROOT_DIR / "operations" / "demande"
+RESULTAT_DIR = ROOT_DIR / "operations" / "resultats"
 
 FICHIERS_REQUIS = [
     ENTREPRISE_DIR / "identite.md",

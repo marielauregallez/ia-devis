@@ -51,12 +51,12 @@ Ce document definit les regles de gouvernance pour utiliser `ia-devis` de manier
   - usage incoherent des remises,
   - biais de selection de prestations.
 - Comparaison echantillonnee entre devis produits et decisions metier attendues.
-- Mise a jour des regles metier (`2-catalogue/`) lorsque des ecarts repetes sont observes.
+- Mise a jour des regles metier (`metier/catalogue/`) lorsque des ecarts repetes sont observes.
 
 ## Securite des donnees
 
 - Principe de minimisation : ne stocker que les informations necessaires au devis.
-- Protection des fichiers contenant des donnees clients (`3-clients/`, `5-devis-genere/`).
+- Protection des fichiers contenant des donnees clients (`metier/clients/`, `operations/resultats/`).
 - Acces limite aux personnes autorisees (controle d'acces du poste/depot).
 - Ne jamais publier de donnees clients reelles dans un depot public.
 - Rotation et protection des cles API si utilisation d'un service LLM externe.

@@ -20,11 +20,11 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r _technique/requirements.txt
+          pip install -r technique/scripts/requirements.txt
 
       - name: Lint
         run: |
-          ruff check _technique adapters tests
+          ruff check technique/scripts technique/adapters technique/tests
 
       - name: Run tests
         run: |
@@ -32,4 +32,4 @@ jobs:
 
       - name: Validate schemas
         run: |
-          python _technique/valider_schemas.py
+          python technique/scripts/valider_schemas.py

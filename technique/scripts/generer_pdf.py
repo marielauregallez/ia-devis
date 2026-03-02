@@ -7,9 +7,9 @@ from datetime import datetime
 # Configuration
 # -------------------------
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-RESULTAT_DIR = BASE_DIR / "5-devis-genere"
-ENTREPRISE_DIR = BASE_DIR / "1-entreprise"
+ROOT_DIR = Path(__file__).resolve().parent.parent.parent
+RESULTAT_DIR = ROOT_DIR / "operations" / "resultats"
+ENTREPRISE_DIR = ROOT_DIR / "metier" / "entreprise"
 LOGO_PATH = ENTREPRISE_DIR / "logo_inn.png"
 
 # -------------------------
@@ -452,7 +452,7 @@ def afficher_recapitulatif_et_valider(quote):
     if reponse not in ("o", "oui", "y", "yes"):
         print()
         print("  Generation annulee.")
-        print("  Modifiez 5-devis-genere/devis.json puis relancez le script.")
+        print("  Modifiez operations/resultats/devis.json puis relancez le script.")
         sys.exit(0)
 
     print()
@@ -499,7 +499,7 @@ def main():
     pdf_path = RESULTAT_DIR / "devis.pdf"
     try:
         from weasyprint import HTML
-        HTML(string=html_content, base_url=str(BASE_DIR)).write_pdf(str(pdf_path))
+        HTML(string=html_content, base_url=str(ROOT_DIR)).write_pdf(str(pdf_path))
         print(f"[OK] PDF genere : {pdf_path}")
     except ImportError:
         print()

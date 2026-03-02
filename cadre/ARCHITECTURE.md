@@ -11,15 +11,15 @@ flowchart TD
     U[Utilisateur] --> C[Chat Cursor]
     C --> R[Regle agent .cursor/rules/agent-devis.mdc]
     R --> S[_installation/etat.json]
-    R --> E1[1-entreprise]
-    R --> E2[2-catalogue]
-    R --> E3[3-clients]
-    R --> E4[4-nouvelle-demande]
-    R --> E5[5-devis-genere]
-    R --> T[_technique scripts Python]
+    R --> E1[metier/entreprise]
+    R --> E2[metier/catalogue]
+    R --> E3[metier/clients]
+    R --> E4[operations/demande]
+    R --> E5[operations/resultats]
+    R --> T[technique/scripts]
 
-    E4 --> GD[generer_devis.py]
-    GD --> F[adapters/factory.py]
+    E4 --> GD[technique/scripts/generer_devis.py]
+    GD --> F[technique/adapters/factory.py]
     F --> OAI[OpenAI]
     F --> AZ[Azure OpenAI]
     F --> MIS[Mistral]
@@ -27,7 +27,7 @@ flowchart TD
     E1 --> GD
     E2 --> GD
     GD --> J[devis.json]
-    J --> GP[generer_pdf.py]
+    J --> GP[technique/scripts/generer_pdf.py]
     E1 --> GP
     GP --> H[devis.html]
     GP --> P[devis.pdf]
@@ -41,10 +41,10 @@ flowchart TD
 2. L'agent lit `_installation/etat.json`.
 3. Si `installation_terminee = false`, l'agent pose les questions de configuration une seule fois.
 4. Les reponses alimentent progressivement :
-   - `1-entreprise/identite.md`
-   - `1-entreprise/mentions-legales.md`
-   - `2-catalogue/services.json`
-   - `2-catalogue/regles-tarification.md`
+   - `metier/entreprise/identite.md`
+   - `metier/entreprise/mentions-legales.md`
+   - `metier/catalogue/services.json`
+   - `metier/catalogue/regles-tarification.md`
 5. L'etat des etapes est marque dans `_installation/etat.json`.
 6. Quand tout est complete, `installation_terminee` passe a `true`.
 
@@ -55,10 +55,10 @@ flowchart TD
    - contexte entreprise,
    - regles metier,
    - demande client.
-3. Un devis structure est produit dans `5-devis-genere/devis.json`.
-4. Le devis lisible est produit dans `5-devis-genere/devis.md`.
+3. Un devis structure est produit dans `operations/resultats/devis.json`.
+4. Le devis lisible est produit dans `operations/resultats/devis.md`.
 5. Avant export final, l'utilisateur valide les chiffres importants (prix, remise, total).
-6. `generer_pdf.py` produit `devis.html` (et `devis.pdf` si dependances installees).
+6. `technique/scripts/generer_pdf.py` produit `devis.html` (et `devis.pdf` si dependances installees).
 
 ## Separation des responsabilites
 
@@ -90,24 +90,24 @@ flowchart TD
 - Calcul/affichage des montants a partir des donnees de reference.
 - Validation explicite avant generation finale.
 - Production des fichiers de sortie (`json`, `md`, `html`, `pdf`).
-- Validation de schemas (`schemas/*.json`) en CI.
+- Validation de schemas (`technique/schemas/*.json`) en CI.
 
 ## Contrats de donnees (schemas)
 
-- `schemas/services.schema.json` : valide la structure du catalogue.
-- `schemas/devis.schema.json` : valide la structure d'un devis genere.
+- `technique/schemas/services.schema.json` : valide la structure du catalogue.
+- `technique/schemas/devis.schema.json` : valide la structure d'un devis genere.
 - CI execute automatiquement la validation des schemas a chaque push.
 
 ## Justification des choix d'architecture
 
-- **Organisation par dossiers numerotes (`1-...` a `5-...`)**
-  - Rend le projet lisible pour un profil non technique.
+- **Organisation par zones (`metier`, `operations`, `cadre`, `technique`)**
+  - Rend le projet plus lisible pour un profil non technique.
 - **Regle Cursor unique always-apply**
   - Assure un comportement stable de l'agent entre sessions.
 - **Etat d'installation persistant (`_installation/etat.json`)**
   - Evite les questions repetitives et rend le parcours fluide.
 - **Separation metier / technique**
   - Les utilisateurs modifient surtout les dossiers metier.
-  - Les scripts restent isoles dans `_technique`.
+  - Les scripts restent isoles dans `technique/scripts`.
 - **Sorties multi-formats**
   - `json` pour la structure, `md/html/pdf` pour la lecture et le partage.
